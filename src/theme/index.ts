@@ -31,6 +31,10 @@ const spacing = {
   'y-16': normalizeHeight(16),
   'x-20': normalize(20),
   'y-20': normalizeHeight(20),
+  'x-22': normalize(22),
+  'y-22': normalizeHeight(22),
+  'x-24': normalize(24),
+  'y-24': normalizeHeight(24),
   'x-32': normalize(32),
   'y-32': normalizeHeight(32),
 }
@@ -39,7 +43,16 @@ const spacing = {
 const theme = createTheme({
   shadows,
   fonts: fontFamilies,
-  colors,
+  colors: {
+    background: colors.background,
+    white: colors.white,
+    warm: colors.warm,
+    cold: colors.cold,
+    blue: colors.blue,
+    grayOne: colors.gray.one,
+    grayTwo: colors.gray.two,
+    transparent: 'transparent'
+  },
   spacing,
   breakpoints: {
     phone: 0,
@@ -48,28 +61,28 @@ const theme = createTheme({
   textVariants: {
     defaults: {},
     bigtitle: {
-      color: 'grayOne',
+      color: 'white',
       fontSize: normalize(30),
-      fontFamily: 'mulishSemiBold',
+      fontFamily: fontFamilies.AktivGroteskBold,
     },
     title: {
-      color: 'grayOne',
-      fontFamily: 'mulishSemiBold',
+      color: 'white',
+      fontFamily: fontFamilies.AktivGroteskBold,
       fontSize: normalize(20),
     },
     bigsubtitle: {
-      color: 'grayOne',
-      fontFamily: 'mulishSemiBold',
+      color: 'white',
+      fontFamily: fontFamilies.AktivGroteskBold,
       fontSize: normalize(15),
     },
     subtitle: {
-      color: 'grayOne',
-      fontFamily: 'mulishRegular',
+      color: 'white',
+      fontFamily: fontFamilies.AktivGroteskRegular,
       fontSize: normalize(14),
     },
     body: {
-      color: 'grayFive',
-      fontFamily: 'mulishRegular',
+      color: 'white',
+      fontFamily: fontFamilies.AktivGroteskRegular,
       fontSize: normalize(12),
     },
   },

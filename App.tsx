@@ -1,8 +1,9 @@
 import { useCallback } from 'react'
-import { Text, View, StyleSheet } from 'react-native'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
 import { ThemeProvider } from './src/theme/ThemeProvider'
+import Box from '@components/Box'
+import FamilyMode from '@components/FamilyMode'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -38,18 +39,9 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <View style={styles.container} onLayout={onLayoutRootView}>
-        <Text style={{ fontFamily: 'AktivGrotesk-Bold', fontSize: 30 }}>AktivGrotesk Bold</Text>
-        <Text style={{ fontSize: 30 }}>Platform Default</Text>
-      </View>
+      <Box onLayout={onLayoutRootView} flex={1} backgroundColor={'background'}>
+        <FamilyMode />
+      </Box>
     </ThemeProvider>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-})
