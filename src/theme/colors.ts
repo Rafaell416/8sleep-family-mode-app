@@ -4,6 +4,12 @@ export default {
   warm: '#C31435',
   cold: '#3744F3',
   blue: '#246AFF',
+  darkBlue: {
+    one: '#000066',
+    two: '#000499',
+    three: '#0037CC',
+    four: '#246AFF'
+  },
   gray: {
     one: '#6A6A6A',
     two: '#7A7A7A',

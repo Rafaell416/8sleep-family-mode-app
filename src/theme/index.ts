@@ -51,7 +51,11 @@ const theme = createTheme({
     blue: colors.blue,
     grayOne: colors.gray.one,
     grayTwo: colors.gray.two,
-    transparent: 'transparent'
+    transparent: 'transparent',
+    darkBlueOne: colors.darkBlue.one,
+    darkBlueTwo: colors.darkBlue.two,
+    darkBlueThree: colors.darkBlue.three,
+    darkBlueFour: colors.darkBlue.four,
   },
   spacing,
   breakpoints: {

@@ -23,12 +23,12 @@ const FamilyMembers = () => {
   const [selected, setSelected] = useState<FamilyMember>(family_members[1])
 
   const opacities = family_members.reduce<SharedValues>((acc, member, index) => {
-    acc[member.id] = useSharedValue(index === 1 ? 1 : 0.5)
+    acc[member.id] = useSharedValue(index === 1 ? 1 : 0.3)
     return acc
   }, {})
 
   const margins = family_members.reduce<SharedValues>((acc, member, index) => {
-    acc[member.id] = useSharedValue(index === 1 ? 22 : 0)
+    acc[member.id] = useSharedValue(index === 1 ? 30 : 0)
     return acc
   }, {})
 
@@ -36,8 +36,8 @@ const FamilyMembers = () => {
     setSelected(member)
     Object.keys(opacities).forEach((id) => {
       const numericId = parseInt(id)
-      opacities[numericId].value = withTiming(member.id === numericId ? 1 : 0.5, { duration: 200 })
-      margins[numericId].value = withTiming(member.id === numericId ? 22 : 0, { duration: 200 })
+      opacities[numericId].value = withTiming(member.id === numericId ? 1 : 0.3, { duration: 200 })
+      margins[numericId].value = withTiming(member.id === numericId ? 30 : 0, { duration: 200 })
     })
   }, [])
 
