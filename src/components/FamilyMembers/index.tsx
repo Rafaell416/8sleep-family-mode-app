@@ -45,8 +45,6 @@ const FamilyMembers = () => {
     <Box
       width={'100%'}
       height={150}
-      borderWidth={1}
-      borderColor={'warm'}
       flexDirection={'row'}
       alignItems={'center'}
       justifyContent={'space-between'}
@@ -69,7 +67,7 @@ const FamilyMembers = () => {
               borderRadius={50}
               overflow={'hidden'}
               borderWidth={1}
-              borderColor={'white'}
+              borderColor={'blue'}
               style={animatedStyle}
             >
               <Image source={{ uri: member?.photo }} style={{ height: '100%', width: '100%' }} />

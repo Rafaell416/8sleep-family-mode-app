@@ -7,7 +7,7 @@ interface SleepStagesProps {
 
 const SleepStages: React.FC<SleepStagesProps> = ({ }) => {
   return (
-    <Box borderWidth={1} borderColor={'blue'} width={'100%'} paddingHorizontal={'x-20'} marginBottom={'y-10'}>
+    <Box width={'100%'} paddingHorizontal={'x-20'} marginBottom={'y-20'}>
       <Text variant={'title'}>Sleep stages</Text>
       <Box width={'100%'} height={16} marginTop={'y-10'} flexDirection={'row'}>
         <Box width={'50%'} backgroundColor={'darkBlueOne'} height={'100%'} />
