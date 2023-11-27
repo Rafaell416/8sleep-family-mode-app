@@ -2,6 +2,7 @@ import { useCallback } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
+import { ThemeProvider } from './src/theme/ThemeProvider'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -36,10 +37,12 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
-      <Text style={{ fontFamily: 'AktivGrotesk-Bold', fontSize: 30 }}>AktivGrotesk Bold</Text>
-      <Text style={{ fontSize: 30 }}>Platform Default</Text>
-    </View>
+    <ThemeProvider>
+      <View style={styles.container} onLayout={onLayoutRootView}>
+        <Text style={{ fontFamily: 'AktivGrotesk-Bold', fontSize: 30 }}>AktivGrotesk Bold</Text>
+        <Text style={{ fontSize: 30 }}>Platform Default</Text>
+      </View>
+    </ThemeProvider>
   )
 }
 

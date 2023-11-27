@@ -1,0 +1,18 @@
+export default {
+  AktivGroteskBlack: 'AktivGrotesk-Black',
+  AktivGroteskBlackItalic: 'AktivGrotesk-BlackItalic',
+  AktivGroteskBold: 'AktivGrotesk-Bold',
+  AktivGroteskBoldItalic: 'AktivGrotesk-BoldItalic',
+  AktivGroteskHairline: 'AktivGrotesk-Hairline',
+  AktivGroteskHairlineItalic: 'AktivGrotesk-HairlineItalic',
+  AktivGroteskItalic: 'AktivGrotesk-Italic',
+  AktivGroteskLight: 'AktivGrotesk-Light',
+  AktivGroteskLightItalic: 'AktivGrotesk-LightItalic',
+  AktivGroteskMedium: 'AktivGrotesk-Medium',
+  AktivGroteskMediumItalic: 'AktivGrotesk-MediumItalic',
+  AktivGroteskRegular: 'AktivGrotesk-Regular',
+  AktivGroteskThin: 'AktivGrotesk-Thin',
+  AktivGroteskThinItalic: 'AktivGrotesk-ThinItalic',
+  AktivGroteskXBold: 'AktivGrotesk-XBold',
+  AktivGroteskXBoldItalic: 'AktivGrotesk-XBoldItalic',
+}
