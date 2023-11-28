@@ -51,6 +51,7 @@ const theme = createTheme({
     blue: colors.blue,
     grayOne: colors.gray.one,
     grayTwo: colors.gray.two,
+    grayThirteen: colors.gray.thirteen,
     transparent: 'transparent',
     darkBlueOne: colors.darkBlue.one,
     darkBlueTwo: colors.darkBlue.two,

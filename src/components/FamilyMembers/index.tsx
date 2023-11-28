@@ -1,33 +1,28 @@
-import { useCallback, useState } from 'react'
+import { useCallback } from 'react'
 import { Image, TouchableOpacity } from 'react-native'
 import Box, { AnimatedBox } from '@components/Box'
+import Text from '@components/Text'
 import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated'
+import { FamilyMember } from 'src/types/family_member'
 
-interface FamilyMember {
-  id: number
-  name: string
-  photo: string
+interface FamilyMembersProps {
+  familyMembers?: FamilyMember[] | null
+  selected?: FamilyMember | null
+  setSelected: (member: FamilyMember) => void
 }
 
 interface SharedValues {
   [key: number]: Animated.SharedValue<number>
 }
 
-const family_members: FamilyMember[] = [
-  { id: 1, name: 'Tony', photo: 'https://wellgroomedgentleman.com/wp-content/uploads/2023/10/Tony_Stark_Beard_with_Quiff_Hairstyle.width-800.jpg' },
-  { id: 2, name: 'Bruce', photo: 'https://www.themarysue.com/wp-content/uploads/2021/10/Mark-Ruffalo-Bruce-Banner.jpeg' },
-  { id: 3, name: 'Nat', photo: 'https://i.pinimg.com/1200x/d3/6e/3a/d36e3aadd0bac518e54283e062baeb0a.jpg' }
-]
+const FamilyMembers: React.FC<FamilyMembersProps> = ({ selected, familyMembers, setSelected }) => {
 
-const FamilyMembers = () => {
-  const [selected, setSelected] = useState<FamilyMember>(family_members[1])
-
-  const opacities = family_members.reduce<SharedValues>((acc, member, index) => {
+  const opacities = familyMembers?.reduce<SharedValues>((acc, member, index) => {
     acc[member.id] = useSharedValue(index === 1 ? 1 : 0.3)
     return acc
   }, {})
 
-  const margins = family_members.reduce<SharedValues>((acc, member, index) => {
+  const margins = familyMembers?.reduce<SharedValues>((acc, member, index) => {
     acc[member.id] = useSharedValue(index === 1 ? 30 : 0)
     return acc
   }, {})
@@ -36,8 +31,12 @@ const FamilyMembers = () => {
     setSelected(member)
     Object.keys(opacities).forEach((id) => {
       const numericId = parseInt(id)
-      opacities[numericId].value = withTiming(member.id === numericId ? 1 : 0.3, { duration: 200 })
-      margins[numericId].value = withTiming(member.id === numericId ? 30 : 0, { duration: 200 })
+      if (opacities) {
+        opacities[numericId].value = withTiming(member.id === numericId ? 1 : 0.3, { duration: 200 })
+      }
+      if (margins) {
+        margins[numericId].value = withTiming(member.id === numericId ? 30 : 0, { duration: 200 })
+      }
     })
   }, [])
 
@@ -50,11 +49,11 @@ const FamilyMembers = () => {
       justifyContent={'space-between'}
       paddingHorizontal={'x-20'}
     >
-      {family_members.map((member) => {
+      {familyMembers?.map((member) => {
         const animatedStyle = useAnimatedStyle(() => {
           return {
-            opacity: opacities[member.id].value,
-            marginBottom: margins[member.id].value,
+            opacity: opacities?.[member.id].value,
+            marginBottom: margins?.[member.id].value,
           };
         });
 
@@ -71,8 +70,10 @@ const FamilyMembers = () => {
               style={animatedStyle}
             >
               <Image source={{ uri: member?.photo }} style={{ height: '100%', width: '100%' }} />
+              <Box width={'100%'} style={{ backgroundColor: 'rgba(107, 107, 107, 0.5)' }} position={'absolute'} bottom={0} alignItems={'center'} paddingVertical={'y-4'}>
+                <Text variant={'body'}>{member.name}</Text>
+              </Box>
             </AnimatedBox>
-            <Box />
           </TouchableOpacity>
         )
       })}
@@ -80,4 +81,4 @@ const FamilyMembers = () => {
   )
 }
 
-export default FamilyMembers
+export default FamilyMembers  

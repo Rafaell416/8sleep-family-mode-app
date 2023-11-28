@@ -4,10 +4,10 @@ import colors from '@theme/colors'
 import fontFamilies from '@theme/fontFamilies'
 
 interface TossesAndTurnsProps {
-
+  tntQty: number
 }
 
-const TossesAndTurns: React.FC<TossesAndTurnsProps> = ({ }) => {
+const TossesAndTurns: React.FC<TossesAndTurnsProps> = ({ tntQty }) => {
   return (
     <Box width={'100%'} paddingHorizontal={'x-20'} marginBottom={'y-20'}>
       <Text variant={'title'}>Tosses and turns</Text>
@@ -24,10 +24,10 @@ const TossesAndTurns: React.FC<TossesAndTurnsProps> = ({ }) => {
             marginRight: 10
           }}
         >
-          20
+          {tntQty}
         </Text>
         <Box flexDirection={'row'} flexWrap={'wrap'} maxWidth={110}>
-          {Array(20).fill(null).map((_) => <Box height={6} width={6} marginRight={'x-4'} marginBottom={'y-4'} backgroundColor={'white'} borderRadius={3} />)}
+          {Array(tntQty).fill(null).map((_) => <Box height={6} width={6} marginRight={'x-4'} marginBottom={'y-4'} backgroundColor={'white'} borderRadius={3} />)}
         </Box>
       </Box>
     </Box>

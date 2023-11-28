@@ -4,46 +4,27 @@ import Box from '@components/Box'
 import Text from '@components/Text'
 import colors from '@theme/colors'
 
-interface TemperatureProps {
-
-}
-
 const chartWidth = Dimensions.get('window').width
 
-const Temperature: React.FC<TemperatureProps> = ({ }) => {
+
+interface ChartProps {
+  title: string
+  data: Array<number>
+  labels: Array<string>
+}
+
+const Chart: React.FC<ChartProps> = ({ data, title, labels }) => {
   return (
     <Box width={'100%'} paddingHorizontal={'x-20'} marginBottom={'y-20'}>
-      <Text variant={'title'}>Room and bed temperature</Text>
+      <Text variant={'title'}>{title}</Text>
       <LineChart
         data={{
-          labels: ['7pm', '9pm', '11pm', '1am', '3am', '5am'],
-          datasets: [
-            {
-              data: [
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100
-              ]
-            },
-            {
-              data: [
-                Math.random() * 50,
-                Math.random() * 50,
-                Math.random() * 50,
-                Math.random() * 50,
-                Math.random() * 50,
-                Math.random() * 50
-              ]
-            }
-          ]
+          labels,
+          datasets: [{ data }]
         }}
         width={chartWidth}
         height={220}
-        yAxisLabel='$'
-        yAxisSuffix='k'
+        yAxisSuffix=' °C'
         yAxisInterval={1}
         chartConfig={{
           backgroundColor: colors.background,
@@ -66,4 +47,4 @@ const Temperature: React.FC<TemperatureProps> = ({ }) => {
   )
 }
 
-export default Temperature
+export default Chart
