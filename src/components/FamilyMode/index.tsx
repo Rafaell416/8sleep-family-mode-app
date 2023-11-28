@@ -6,6 +6,7 @@ import FamilyMembers from '@components/FamilyMembers'
 import SleepStages from '@components/SleepStages'
 import TossesAndTurns from '@components/TossesAndTurns'
 import RoomTemperature from '@components/RoomTemperature'
+import BedTemperature from '@components/BedTemperature'
 import { ScrollView, ActivityIndicator } from 'react-native'
 import { fetchAllFamilyData } from '@api/fetchAllFamilyData'
 import { FamilyMember } from 'src/types/family_member'
@@ -63,9 +64,8 @@ function FamilyMode() {
             />
             <SleepStages stages={stages} />
             <TossesAndTurns tntQty={tntQty} />
-            <RoomTemperature
-              tempRoomC={roomTemperature}
-            />
+            <RoomTemperature tempRoomC={roomTemperature} />
+            <BedTemperature tempBedC={bedTemperature} />
           </Box>
         )}
       </ScrollView>
