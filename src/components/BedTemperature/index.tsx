@@ -16,13 +16,18 @@ const BedTemperature: React.FC<BedTemperatureProps> = ({ tempBedC }) => {
 
 
   const tempBedDates = tempBedC?.reduce((accumulator: Acc, currentValue: Curr) => {
-    accumulator.push(dayjs(currentValue[0]).format('h a'))
+    accumulator.push(dayjs(currentValue[0]).format('H'))
     return accumulator
   }, [])
 
 
   return (
-    <Chart title='Bed Temperature' data={bedTempData} labels={tempBedDates} />
+    <Chart
+      title='Bed Temperature'
+      data={bedTempData}
+      labels={tempBedDates}
+      color='#7E25A7'
+    />
   )
 }
 

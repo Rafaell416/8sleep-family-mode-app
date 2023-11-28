@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from 'react'
+import colors from '@theme/colors'
 import Header from '@components/Header'
 import Box from '@components/Box'
 import Text from '@components/Text'
@@ -11,12 +12,13 @@ import Score from '@components/Score'
 import { ScrollView, ActivityIndicator } from 'react-native'
 import { fetchAllFamilyData } from '@api/fetchAllFamilyData'
 import { FamilyMember } from 'src/types/family_member'
-
+import SegmentedControl from '@react-native-segmented-control/segmented-control'
 
 function FamilyMode() {
   const [loading, setLoading] = useState<boolean>(false)
   const [familyMembers, setFamilyMembers] = useState<FamilyMember[] | null>(null)
   const [selected, setSelected] = useState<FamilyMember | null>(null)
+  const [selectedIndex, setSelectedIndex] = useState(1)
 
   useEffect(() => {
     setLoading(true)
@@ -33,16 +35,23 @@ function FamilyMode() {
       })
   }, [])
 
+  useEffect(() => {
+    setSelectedIndex(0)
+  }, [selected])
+
   // console.log('-----')
   // console.log({ selected })
 
   const render = !loading && !!familyMembers && familyMembers.length > 0
 
-  const stages = selected?.data.intervals[0]?.stages ?? []
-  const score = selected?.data?.intervals[0]?.score ?? 0
-  const tntQty = selected?.data.intervals[0]?.timeseries?.tnt?.length ?? 0
-  const roomTemperature = selected?.data?.intervals[0]?.timeseries?.tempRoomC ?? []
-  const bedTemperature = selected?.data?.intervals[0]?.timeseries?.tempBedC ?? []
+  const intervals = selected?.data?.intervals?.length
+  const tabs = new Array(intervals).fill('').map((e, i) => `Interval #${i + 1}`)
+
+  const stages = selected?.data.intervals[selectedIndex]?.stages ?? []
+  const score = selected?.data?.intervals[selectedIndex]?.score ?? 0
+  const tntQty = selected?.data.intervals[selectedIndex]?.timeseries?.tnt?.length ?? 0
+  const roomTemperature = selected?.data?.intervals[selectedIndex]?.timeseries?.tempRoomC ?? []
+  const bedTemperature = selected?.data?.intervals[selectedIndex]?.timeseries?.tempBedC ?? []
 
   return (
     <>
@@ -64,6 +73,16 @@ function FamilyMode() {
               selected={selected}
               setSelected={setSelected}
             />
+            <Box width={'100%'} paddingHorizontal={'x-20'} marginBottom={'y-20'}>
+              <SegmentedControl
+                values={tabs}
+                selectedIndex={selectedIndex}
+                backgroundColor={colors.gray.one}
+                onChange={(event) => {
+                  setSelectedIndex(event.nativeEvent.selectedSegmentIndex)
+                }}
+              />
+            </Box>
             <Score score={score} />
             <SleepStages stages={stages} />
             <TossesAndTurns tntQty={tntQty} />

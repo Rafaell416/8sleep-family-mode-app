@@ -11,11 +11,12 @@ interface ChartProps {
   title: string
   data: Array<number>
   labels: Array<string>
+  color?: string
 }
 
-const Chart: React.FC<ChartProps> = ({ data, title, labels }) => {
+const Chart: React.FC<ChartProps> = ({ data, title, labels, color }) => {
   return (
-    <Box width={'100%'} paddingHorizontal={'x-20'} marginBottom={'y-20'}>
+    <Box width={'100%'} marginBottom={'y-20'} paddingHorizontal={'x-20'}>
       <Text variant={'title'} marginBottom={'y-10'}>{title}</Text>
       <LineChart
         data={{
@@ -31,7 +32,7 @@ const Chart: React.FC<ChartProps> = ({ data, title, labels }) => {
           backgroundGradientFrom: colors.background,
           backgroundGradientTo: colors.background,
           decimalPlaces: 2,
-          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          color: (opacity = 1) => color ? color : `rgba(255, 255, 255, ${opacity})`,
           labelColor: () => colors.white,
           propsForDots: {
             r: '2',
