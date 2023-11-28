@@ -16,7 +16,7 @@ interface ChartProps {
 const Chart: React.FC<ChartProps> = ({ data, title, labels }) => {
   return (
     <Box width={'100%'} paddingHorizontal={'x-20'} marginBottom={'y-20'}>
-      <Text variant={'title'}>{title}</Text>
+      <Text variant={'title'} marginBottom={'y-10'}>{title}</Text>
       <LineChart
         data={{
           labels,

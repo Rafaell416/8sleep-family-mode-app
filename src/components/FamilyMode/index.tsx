@@ -7,6 +7,7 @@ import SleepStages from '@components/SleepStages'
 import TossesAndTurns from '@components/TossesAndTurns'
 import RoomTemperature from '@components/RoomTemperature'
 import BedTemperature from '@components/BedTemperature'
+import Score from '@components/Score'
 import { ScrollView, ActivityIndicator } from 'react-native'
 import { fetchAllFamilyData } from '@api/fetchAllFamilyData'
 import { FamilyMember } from 'src/types/family_member'
@@ -37,10 +38,11 @@ function FamilyMode() {
 
   const render = !loading && !!familyMembers && familyMembers.length > 0
 
-  const stages = selected?.data.intervals[0]?.stages
-  const tntQty = selected?.data.intervals[0]?.timeseries?.tnt?.length
-  const roomTemperature = selected?.data?.intervals[0]?.timeseries?.tempRoomC
-  const bedTemperature = selected?.data?.intervals[0]?.timeseries?.tempBedC
+  const stages = selected?.data.intervals[0]?.stages ?? []
+  const score = selected?.data?.intervals[0]?.score ?? 0
+  const tntQty = selected?.data.intervals[0]?.timeseries?.tnt?.length ?? 0
+  const roomTemperature = selected?.data?.intervals[0]?.timeseries?.tempRoomC ?? []
+  const bedTemperature = selected?.data?.intervals[0]?.timeseries?.tempBedC ?? []
 
   return (
     <>
@@ -62,6 +64,7 @@ function FamilyMode() {
               selected={selected}
               setSelected={setSelected}
             />
+            <Score score={score} />
             <SleepStages stages={stages} />
             <TossesAndTurns tntQty={tntQty} />
             <RoomTemperature tempRoomC={roomTemperature} />
