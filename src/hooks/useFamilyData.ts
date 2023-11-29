@@ -1,42 +1,46 @@
 import { useEffect, useState } from 'react'
-import { fetchAllFamilyData } from '../api/fetchAllFamilyData'
-import { FamilyMember } from '../types/family_member'
+import { fetchAllFamilyData } from '@api/fetchAllFamilyData'
+import { FamilyMember } from 'src/types/family_member'
 
 export function useFamilyData() {
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(true)
   const [familyMembers, setFamilyMembers] = useState<FamilyMember[] | null>(null)
   const [selected, setSelected] = useState<FamilyMember | null>(null)
   const [selectedIndex, setSelectedIndex] = useState(1)
 
   useEffect(() => {
-    setLoading(true)
-    fetchAllFamilyData()
-      .then((results) => {
+    const fetchData = async () => {
+      try {
+        setLoading(true)
+        const results = await fetchAllFamilyData()
         const validResults = results ? results.filter(item => item !== undefined) as FamilyMember[] : null
         setFamilyMembers(validResults)
-        setSelected(validResults && validResults?.length > 1 ? validResults[1] : null)
+        setSelected(validResults && validResults.length > 1 ? validResults[1] : null)
+      } catch (error) {
+        console.warn(error)
+      } finally {
         setLoading(false)
-      })
-      .catch((e) => {
-        setLoading(false)
-        console.warn(e)
-      })
+      }
+    }
+
+    fetchData()
   }, [])
 
   useEffect(() => {
     setSelectedIndex(0)
   }, [selected])
 
-  const intervals = selected?.data?.intervals?.length
-  const tabs = new Array(intervals).fill('').map((e, i) => `Interval #${i + 1}`)
+  const intervals = selected?.data?.intervals
+  const tabs = intervals ? intervals.map((_, i) => `Interval #${i + 1}`) : []
+  const selectedInterval = intervals?.[selectedIndex]
 
-  const stages = selected?.data.intervals[selectedIndex]?.stages ?? []
-  const score = selected?.data?.intervals[selectedIndex]?.score ?? 0
-  const tntQty = selected?.data.intervals[selectedIndex]?.timeseries?.tnt?.length ?? 0
-  const roomTemperature = selected?.data?.intervals[selectedIndex]?.timeseries?.tempRoomC ?? []
-  const bedTemperature = selected?.data?.intervals[selectedIndex]?.timeseries?.tempBedC ?? []
-  const respiratoryRate = selected?.data?.intervals[selectedIndex]?.timeseries?.respiratoryRate ?? []
-  const heartRate = selected?.data?.intervals[selectedIndex]?.timeseries?.heartRate ?? []
+  const stages = selectedInterval?.stages ?? []
+  const score = selectedInterval?.score ?? 0
+  const tntQty = selectedInterval?.timeseries?.tnt?.length ?? 0
+  const roomTemperature = selectedInterval?.timeseries?.tempRoomC ?? []
+  const bedTemperature = selectedInterval?.timeseries?.tempBedC ?? []
+  const respiratoryRate = selectedInterval?.timeseries?.respiratoryRate ?? []
+  const heartRate = selectedInterval?.timeseries?.heartRate ?? []
 
   return {
     loading,
@@ -52,6 +56,6 @@ export function useFamilyData() {
     roomTemperature,
     bedTemperature,
     respiratoryRate,
-    heartRate,
+    heartRate
   }
 }
