@@ -34,7 +34,7 @@ function groupAndSumStages(data: SleepStage[]): { stage: string; duration: numbe
 }
 
 function secondsToFormattedHours(seconds: number): string {
-  const hours = Math.floor(seconds / 3600);
+  const hours = Math.floor(seconds / 3600)
   const minutes = Math.floor((seconds % 3600) / 60)
   const formattedHours = `${hours}:${minutes.toString().padStart(2, '0')}`
   return formattedHours

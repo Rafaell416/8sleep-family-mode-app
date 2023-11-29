@@ -54,8 +54,8 @@ const FamilyMembers: React.FC<FamilyMembersProps> = ({ selected, familyMembers, 
           return {
             opacity: opacities?.[member.id].value,
             marginBottom: margins?.[member.id].value,
-          };
-        });
+          }
+        })
 
 
         return (
