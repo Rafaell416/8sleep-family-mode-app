@@ -12,11 +12,12 @@ interface ChartProps {
   data: Array<number>
   labels: Array<string>
   color?: string
+  yAxisSuffix?: string
 }
 
-const Chart: React.FC<ChartProps> = ({ data, title, labels, color }) => {
+const Chart: React.FC<ChartProps> = ({ data, title, labels, color, yAxisSuffix = ' °C' }) => {
   return (
-    <Box width={'100%'} marginBottom={'y-20'} paddingHorizontal={'x-20'}>
+    <Box width={'100%'} marginBottom={'y-20'} paddingHorizontal={'x-10'}>
       <Text variant={'title'} marginBottom={'y-10'}>{title}</Text>
       <LineChart
         data={{
@@ -25,7 +26,7 @@ const Chart: React.FC<ChartProps> = ({ data, title, labels, color }) => {
         }}
         width={chartWidth}
         height={220}
-        yAxisSuffix=' °C'
+        yAxisSuffix={yAxisSuffix}
         yAxisInterval={1}
         chartConfig={{
           backgroundColor: colors.background,

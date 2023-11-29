@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState } from 'react'
 import colors from '@theme/colors'
 import Header from '@components/Header'
 import Box from '@components/Box'
@@ -9,6 +9,8 @@ import TossesAndTurns from '@components/TossesAndTurns'
 import RoomTemperature from '@components/RoomTemperature'
 import BedTemperature from '@components/BedTemperature'
 import Score from '@components/Score'
+import RespiratoryRate from '@components/RespiratoryRate'
+import HeartRate from '@components/HeartRate'
 import { ScrollView, ActivityIndicator } from 'react-native'
 import { fetchAllFamilyData } from '@api/fetchAllFamilyData'
 import { FamilyMember } from 'src/types/family_member'
@@ -39,9 +41,6 @@ function FamilyMode() {
     setSelectedIndex(0)
   }, [selected])
 
-  // console.log('-----')
-  // console.log({ selected })
-
   const render = !loading && !!familyMembers && familyMembers.length > 0
 
   const intervals = selected?.data?.intervals?.length
@@ -52,6 +51,8 @@ function FamilyMode() {
   const tntQty = selected?.data.intervals[selectedIndex]?.timeseries?.tnt?.length ?? 0
   const roomTemperature = selected?.data?.intervals[selectedIndex]?.timeseries?.tempRoomC ?? []
   const bedTemperature = selected?.data?.intervals[selectedIndex]?.timeseries?.tempBedC ?? []
+  const respiratoryRate = selected?.data?.intervals[selectedIndex]?.timeseries?.respiratoryRate ?? []
+  const heartRate = selected?.data?.intervals[selectedIndex]?.timeseries?.heartRate ?? []
 
   return (
     <>
@@ -88,6 +89,8 @@ function FamilyMode() {
             <TossesAndTurns tntQty={tntQty} />
             <RoomTemperature tempRoomC={roomTemperature} />
             <BedTemperature tempBedC={bedTemperature} />
+            <RespiratoryRate respiratoryRate={respiratoryRate} />
+            <HeartRate heartRate={heartRate} />
           </Box>
         )}
       </ScrollView>
