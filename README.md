@@ -15,20 +15,24 @@ Before you begin, ensure you have met the following requirements:
 
   ```bash
   git clone https://github.com/Rafaell416/8sleep-family-mode-app.git
+  ```
 
 2. **Navigate to the project folder:**
 
   ```bash
   cd 8sleep-family-mode-app
+  ```
 
 3. **Install dependencies:**
 
   ```bash
   npm install
+  ```
 
 4. **Run the project:**
 
   ```bash
   yarn ios
+  ```
 
 
